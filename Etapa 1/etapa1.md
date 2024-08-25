@@ -8,10 +8,24 @@
 
 ### Requisitos Adicionais:
  1. **Requisito 1**: 
-    - Entidade:
-    - Relacionamento:
-    - Agregação ou Hierarquia: 
+    #### Requisito Adicional 1: Programa de Fidelidade
+
+##### Relacionamento **Participa**:
+- **Cliente** <-> **ProgramaFidelidade**
+- **Descrição:** Indica que um cliente está participando de um ou mais programas de fidelidade.
+
+##### Relacionamento **Acumula**:
+- **Cliente** <-> **PontoFidelidade**
+- **Descrição:** Indica os pontos que um cliente acumula como parte do programa de fidelidade.
+
+
  2. **Requisito 2**:
-    - Entidade:
-    - Relacionamento:
-    - Agregação ou Hierarquia: 
+##### Avaliação de Produtos
+
+###### Relacionamento **Avalia**:
+- **Cliente** <-> **AvaliacaoProduto**
+- **Descrição:** Indica que um cliente fez uma avaliação de um produto.
+
+###### Relacionamento **AvaliaProduto**:
+- **AvaliacaoProduto** <-> **Produto**
+- **Descrição:** Indica qual produto foi avaliado pelo cliente.
