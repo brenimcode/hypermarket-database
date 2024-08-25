@@ -8,16 +8,15 @@
 
 ### Requisitos Adicionais:
  1. **Requisito 1**: 
-    #### Requisito Adicional 1: Programa de Fidelidade
+#### Programa de Fidelidade
 
-##### Relacionamento **Participa**:
+###### Relacionamento **Participa**:
 - **Cliente** <-> **ProgramaFidelidade**
 - **Descrição:** Indica que um cliente está participando de um ou mais programas de fidelidade.
 
-##### Relacionamento **Acumula**:
+###### Relacionamento **Acumula**:
 - **Cliente** <-> **PontoFidelidade**
 - **Descrição:** Indica os pontos que um cliente acumula como parte do programa de fidelidade.
-
 
  2. **Requisito 2**:
 ##### Avaliação de Produtos
