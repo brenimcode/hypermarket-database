@@ -4,7 +4,7 @@
 **Data de Entrega:** 25/10  
 **Disciplina:** Sistemas de Banco de Dados  
 **Professora:** Maria Camila Nardini Barioni  
-**Grupo:** Breno Oliveira Cavalcante, Lucas de Paula Martins, Lucas Araujo, Cauê Grassi Ribeiro
+**Grupo:** Breno Oliveira Cavalcante, Lucas de Paula Martins, Lucas Araujo, Cauê Grassi 
 
 ### Requisitos Adicionais:
  1. **Requisito 1**: 
