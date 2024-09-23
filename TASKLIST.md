@@ -14,7 +14,7 @@
 
 *Nota:* Não serão considerados requisitos adicionais que simplesmente adicionem um novo atributo às entidades já descritas.
 
-### Tarefa 1
+### Tarefa 1 [X]
   1. **Criação do DER:**
      - [ ] Desenhar o Diagrama Entidade-Relacionamento (DER) que represente todas as entidades, relacionamentos, atributos, e chaves, conforme os requisitos fornecidos na seção 3.3.
 
@@ -26,5 +26,5 @@
      - [ ] Para cada requisito da seção 3.3 e para os requisitos adicionais, descrever detalhadamente como foram modelados no DER.
      - [ ] Justificar as escolhas feitas para a modelagem de entidades, relacionamentos, cardinalidades, restrições de participação, etc.
 
-
+### TAREFA 2 [X]
 ---
