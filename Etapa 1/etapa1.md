@@ -1,30 +1,39 @@
-# PROJETO: HIPERMERCADO BANCO DE DADOS
+# Descrição da resolução dos requisitos
 
-**Universidade Federal de Uberlândia | UFU**   
-**Data de Entrega:** 25/10
-**Disciplina:** Sistemas de Banco de Dados
-**Professora:** Maria Camila Nardini Barioni
-**Grupo:** Breno Oliveira Cavalcante, Lucas de Paula Martins, Lucas Araujo, Cauê Grassi 
+1. **a)** Criamos a entidade **PRODUTO** com os seguintes atributos: idProduto (como chave primária), unidade de venda, descrição, média, preço, foto, estoque e nome do fabricante. Para a categoria criamos uma entidade **CATEGORIA** e **SESSÃO** para definir qual sessão ele deve ser colocado na gôndola para venda.
+2. **b)** Para realizar essa modelagem, criamos a entidade **CATEGORIA**, que se relaciona com a entidade **PRODUTO** através do relacionamento 'Categoria_Produto', o qual armazena a chave primária de ambos, já que é um relacionamento muitos para muitos. A chave primária de **CATEGORIA** é 'idCategoria', e ela possui o atributo 'descrição'.
+3. **c)**  Criamos a entidade **SESSÃO**, que tem como chave primária o atributo ‘idSessao’ e como atributo não chave 'nome'. Essa entidade foi criada para armazenar várias sessões. Cada produto está associado a apenas uma sessão, e cada sessão pode conter vários produtos.
+4. **d)**  Para os **FORNECEDORES**, relacionamos essa entidade com as entidades **CONTRATO** e **PRODUTO**. **FORNECEDORES** contém os atributos: idFornecedor (chave primária), denominação social, endereço (atributo composto à bairro, cidade, estado, CEP), telefones de contato (atributo multivalorado), endereço eletrônico/email e CNPJ.
+5. **e)** Os **FORNECEDORES** têm um relacionamento N:M (muitos para muitos) com a entidade **PRODUTO**, pois vários fornecedores podem oferecer o mesmo produto e outros também. Incluímos o atributo **PRECO_CUSTO** na relação **OFERECE**, que relaciona produtos com fornecedores.
+6. **f)** Criamos a entidade **PEDIDO DE COMPRAS**, que contém os seguintes atributos: idPedido (chave primária), valor_total_desconto, data_ _entrega, valor_total, condicao_pagamento, devolução, data_emissão e data_previsão. Para que **PEDIDO DE COMPRAS** saiba quais produtos estão incluídos no pedido, criamos uma relação **CONTEM**. Para indicar qual fornecedor atenderá ao pedido, utilizamos a entidade fraca **CONTRATO**, que relaciona as três entidades: **FORNECEDOR**, **GERENTE** e **PEDIDO DE COMPRAS**.
+7. **g)**  Adicionamos o atributo **quantidade** no relacionamento **CONTEM**. Para atender ao requisito, também configuramos a cardinalidade N:M (muitos para muitos) entre **PRODUTO** e **PEDIDO DE COMPRAS**, com participação total do lado de **PRODUTO**, pois todo pedido de compra deve conter pelo menos um produto e um mesmo produto pode ser pedido por vários pedidos de compra.
+8. **h)**  Através da entidade fraca **CONTRATO**, estabelecemos a relação entre **FORNECEDOR**, **PEDIDO DE COMPRAS e GERENTE**. A entidade **CONTRATO** possui os atributos: prazo_medio_entrega, desconto, condição_pagamento e valor total do ano anterior. As chaves estrangeiras da entidade **CONTRATO** são **gerentes (CPF_Gerente)** e **Fornecedor (idFornecedor)**, que juntas formam a chave primária da entidade. Além disso, contrato tem a relação ‘Gera_pedido’ com **PEDIDO DE COMPRA** para indicar qual o pedido resultante do contrato firmado entre gerente e fornecedor.
+9. **i)**  Foi criada a entidade **PROMOCAO**, que possui os seguintes atributos: idPromocao (chave primária), data de início, data de fim, nome, descrição, valor desconto e os produtos incluídos através do relacionamento ‘Desconto’.
+10. **j)**  Especificamos que um **Produto** em promoção tem um relacionamento N:M com **Promoção** pelo relacionamento **‘desconto’**. Do lado da **Promoção**, a participação é total (cada promoção deve incluir ao menos um produto) e que tem cardinalidade N:M, pois uma promoção pode conter vários produtos e vários produtos podem estar em várias promoções diferentes dependendo da época
+11. **k)**  A entidade **Cliente** possui os seguintes atributos: CPF_Cliente (chave primária), nome, data_nascimento, profissão, endereço (atributo multivalorado e composto) e telefones (atributo composto).
+12. **l)**  Foi criada a entidade **ESPECIAL**, que é uma entidade com relação a **CLIENTE** pelo relacionamento ‘Cliente_Categoria’, como cardinalidade N:1. A entidade **ESPECIAL** tem os seguintes atributos: idCategoria(chave primária), descrição (pode ser ‘ouro’, ‘prata’, ‘diamante’ ou ‘Comum’) e valor_minimo_gasto_anual. Além disso, a entidade se relaciona com a entidade **PROMOÇÃO** com cardinalidade N:M pelo relacionamento ‘Promocao_Especial’ que contém o atributo ‘Desconto_Especial’ pra indicar qual o desconto pra certo produto e categoria de cliente especial.
+13. **m)** Pelo mapeamento com a cardinalidade N:1 entre **CLIENTE** e **ESPECIAL**, pois cada cliente pode ser classificado em apenas uma categoria por vez, podendo existir vários clientes em cada categoria de cliente. 
+14. **n)** Criamos a entidade fraca **COMPRA** em relação a **CLIENTE** com cardinalidade 1:N, contendo os seguintes atributos: Forma_de_pagamento, valor_com_desconto, data, valor_total, horário e Cupom_Fical que é a chave parcial e CPF_Cliente como chave estrangeira. 
+15. o) A entidade **ATENDENTE_CAIXA** (subclasse de **FUNCIONARIO**) possui a relação **CONTABILIZA** com entidade **COMPRA**, sendo uma relação 1:N, para saber quem foi o atendente do caixa que registrou a compra.
+16. p) ****A COMPRA entidade também se relaciona com **PRODUTOS** pelo relacionamento ‘carrinho’ com cardinalidade N:M. Carrinho contém o atributo ‘quantidade’ para indicar a quantidade do produto e a chave primaria do produto para indicar qual produto, recebe também o CPF do cliente para saber quem é o comprador e Cupom_Fical de COMPRA . Além disso, a entidade **COMPRA** se relaciona com promoção pelo relacionamento ‘Compra_Desconto’ com cardinalidade N:M, para saber o valor do desconto a ser aplicado. 
+17. **q)**  Para cumprir os requisitos, criamos uma superclasse para **FUNCIONÁRIO**, que contém os seguintes atributos: CPF_Funcionario, função, jornada_de_trabalho, data_de_nascimento, salário, nível_formacao, nome, telefone, endereco_residencial, valor_da_hora_extra e jornada_de_trabalho (20 ou 44 horas).
+18. **r)**  Como o gerente compartilha muitos atributos com a entidade **FUNCIONÁRIO**, criamos a entidade **GERENTE**, que herda de **FUNCIONÁRIO**. Adicionamos os atributos: data_ingresso e tem_formacao_gerencial. Para identificar os funcionários gerenciados por ele, criamos o relacionamento **supervisiona**, que relaciona **FUNCIONÁRIO** e **GERENTE** com cardinalidade 1:N, pois cada funcionário pode ser supervisionado por um gerente e vários funcionários podem ser supervisionados por um único gerente. 
+19. **s)**  Os atendentes de padaria estão localizados na entidade **FUNCIONÁRIO**, onde o atributo **função** é 'ATENDENTE DE PADARIA'.
+20. **t)**  Criamos a entidade **ATENDENTE_CAIXA**, que é uma subclasse da superclasse **FUNCIONÁRIO**. Além disso, **ATENDENTE_CAIXA** possui a relação **CONTABILIZA e** com a entidade **COMPRA**,sendo uma relação 1 :N, além da relação AVALIA_ATENDIMENTO com atributo relacional nota, se relacionando com Cliente, sendo uma relação N:M.
+21. **u)**  Criamos a entidade **REPOSITOR_DE_GÔNDOLA**, que é uma subclasse da superclasse **FUNCIONÁRIO**. Além disso, **REPOSITOR_DE_GÔNDOLA** possui a relação **RESPONSÁVEL** com a entidade **SESSÃO**, sendo uma relação 1:N, pois os repositores de gôndola podem ser responsável por mais de uma sessão.
 
-### Requisitos Adicionais:
- 1. **Requisito 1**: 
-#### Programa de Fidelidade
+---
 
-###### Relacionamento **Participa**:
-- **Cliente** <-> **ProgramaFidelidade**
-- **Descrição:** Indica que um cliente está participando de um ou mais programas de fidelidade.
+## Requisito Extra
 
-###### Relacionamento **Acumula**:
-- **Cliente** <-> **PontoFidelidade**
-- **Descrição:** Indica os pontos que um cliente acumula como parte do programa de fidelidade.
+### 1. Relacionamento **Avalia_Atendimento**:
 
- 2. **Requisito 2**:
-##### Avaliação de Produtos
+- **Cliente** se relaciona com **Atendente_caixa**
+- Criamos o relacionamento ‘Avalia**_Atendimento**’ que indica que um cliente fez uma avaliação de um atendimento com o atributo **nota,** com cardinalidade N:M (Muitos para muitos), pois cada cliente pode dar várias notas para os atendentes. Cada atendente pode receber notas de vários clientes.
 
-###### Relacionamento **Avalia**:
-- **Cliente** <-> **AvaliacaoProduto**
-- **Descrição:** Indica que um cliente fez uma avaliação de um produto.
+---
 
-###### Relacionamento **AvaliaProduto**:
-- **AvaliacaoProduto** <-> **Produto**
-- **Descrição:** Indica qual produto foi avaliado pelo cliente.
+### 2. Relacionamento **Reclamacao**:
+
+- **Cliente** se relaciona com **Gerente**
+- Criamos o relacionameto ‘reclamacao’ que indica que um cliente fez uma reclamação de um atendimento com o atributo ‘descricao’, com cardinalidade N:M (Muitos para muitos),pois cada cliente pode fazer várias reclamações e cada gerente pode receber reclamações de vários clientes.
